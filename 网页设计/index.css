@@ -1,0 +1,33 @@
+.head {
+  color: blueviolet;
+  height: 50px;
+  background-color: aqua;
+  width: 500px;
+  font-family: "楷体", 微软雅黑;
+}
+.l0001 {
+  color: rgb(240, 12, 152);
+  background-color: aquamarine;
+  width: 280px;
+  margin: 10px;
+  text-decoration: underline;
+}
+.Hyperlinks {
+  color: black;
+}
+body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 20px;
+}
+.table {
+  background-color:rgb(255, 255, 255);
+  width: 300px;
+  height: 50px;
+}
+.tr{
+  background-color: rgb(214, 220, 220);
+  padding: 1;
+}
+/*为什么table这个CSS不起作用？
