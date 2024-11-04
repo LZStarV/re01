@@ -1,21 +1,108 @@
 <!DOCTYPE html>
-<html>
-    <!--头部-->
-    <head>
-        <title>新标签页</title>
-    </head>
-    <body>
-        <h1>这是一个LZStarV用于自嗨的网站</h1>
-        <h2>小标题</h2>
-        <p>这是一行字</p>
-        <p1>这又是一行字</p1>
-        <p2>这还是一行字，为什么这里就不换行了？</p2>
-        <p3>有没有大佬教教我这是为啥?</p3>
-        <br/>
-        <a href="www.bilibili.com">不懂就上B站搜！</a>
-        <br/>
-        <a href="https://www.csdn.net/">或者上博客搜！</a>
-        <p></p>
-        <img src="file:///E:/头像.jpg" width="326" height="326"/>
-    </body>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>倒计时按钮</title>
+    <style>
+        body,
+        html {
+            height: 100%;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: Arial, sans-serif;
+        }
+
+        #timerContainer {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        #countdown {
+            font-size: 200px;
+            /* 增大字体大小 */
+            margin-bottom: 20px;
+            /* 增加底部边距 */
+            transition: color 0.5s ease;
+            /* 平滑颜色变化 */
+
+        }
+
+        .red {
+            color: red;
+        }
+
+        #startButton {
+            font-size: 100px;
+            /* 增大按钮字体大小 */
+            padding: 10px 20px;
+            /* 增加按钮内边距 */
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="timerContainer">
+        <div id="countdown">01:00</div>
+        <button id="startButton">开始倒计时</button>
+    </div>
+
+    <script>
+        let countdownTimer;
+        let countdownDuration = 60; // 倒计时持续时间，单位秒
+
+        const countdownElement = document.getElementById('countdown');
+        const startButton = document.getElementById('startButton');
+
+        startButton.addEventListener('click', function () {
+            // 重置倒计时时间
+            countdownDuration = 60;
+            // 更新显示
+            updateCountdownDisplay();
+
+            // 清除之前的定时器
+            if (countdownTimer) {
+                clearInterval(countdownTimer);
+            }
+
+            // 开始倒计时
+            countdownTimer = setInterval(function () {
+                countdownDuration -= 1;
+                updateCountdownDisplay();
+
+                if (countdownDuration === 0) {
+                    clearInterval(countdownTimer);
+                    countdownElement.classList.add('red');
+                    alert('倒计时结束！');
+                    countdownTimer = null;
+                    setTimeout(function () {
+                        // 恢复倒计时显示
+                        countdownElement.classList.remove('red');
+                        countdownDuration = 60;
+                        updateCountdownDisplay();
+                    }, 1000);
+                }
+            }, 1000);
+        });
+
+        function updateCountdownDisplay() {
+            const minutes = Math.floor(countdownDuration / 60);
+            const seconds = countdownDuration % 60;
+            countdownElement.textContent = `${pad(minutes)}:${pad(seconds)}`;
+        }
+
+        function pad(time) {
+            return time < 10 ? '0' + time : time;
+        }
+    </script>
+
+</body>
+
 </html>
